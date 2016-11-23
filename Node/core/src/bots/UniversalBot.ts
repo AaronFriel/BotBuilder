@@ -439,14 +439,14 @@ export class UniversalBot extends Library {
 
     private eventMiddleware(event: IEvent, middleware: IEventMiddleware[], done: Function, error?: (err: Error) => void): void {
         var i = -1;
-        var _this = this;
+        var _universalBot = this;
         function next() {
             if (++i < middleware.length) {
-                _this.tryCatch(() => {
+                _universalBot.tryCatch(() => {
                     middleware[i](event, next);
                 }, () => next());
             } else {
-                _this.tryCatch(() => done(), error);
+                _universalBot.tryCatch(() => done(), error);
             }
         }
         next();
